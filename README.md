@@ -66,3 +66,20 @@ http://localhost:3000/login
 "email": "henrique1@gmail.com",
 "password": "123456ab"
 }
+
+# Evidencias
+
+![image](https://github.com/henriquebh8/ProjetoOnfly/assets/87495080/53bdd9f5-1d3a-40b5-b154-282eab156386)
+
+![image](https://github.com/henriquebh8/ProjetoOnfly/assets/87495080/738e666e-2702-45fc-97db-47855f3319e3)
+
+![image](https://github.com/henriquebh8/ProjetoOnfly/assets/87495080/7ebd673d-d39d-4ca5-8842-df12e1bcbed6)
+
+![image](https://github.com/henriquebh8/ProjetoOnfly/assets/87495080/7aefd343-73b7-446b-b464-e0f28f52619e)
+
+![image](https://github.com/henriquebh8/ProjetoOnfly/assets/87495080/d115f81d-4f01-432e-9818-1e85b73fa975)
+
+
+
+
+
