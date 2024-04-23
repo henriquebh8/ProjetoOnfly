@@ -3,6 +3,10 @@ import moment from "moment";
 import UserService from "../services/userService";
 import MailService from "../services/mailService";
 import { expenseInterface } from "../interfaces/expense.interface";
+import {
+  CreateExpenseParams,
+  ExpenseInterfaceToUpdate,
+} from "../types/expense.types";
 
 export class ExpenseService {
   static async findExpensesByUserId(
@@ -21,15 +25,16 @@ export class ExpenseService {
     return expense;
   }
 
-  static async createExpense(data: {
-    description: string;
-    date: Date;
-    user: string;
-    value: number;
-  }): Promise<expenseInterface> {
-    if (data.value < 0) throw new Error("Value cannot be negative.");
+  static async createExpense(
+    data: CreateExpenseParams
+  ): Promise<expenseInterface> {
+    if (data.value < 0) {
+      throw new Error("Value cannot be negative.");
+    }
     const userExists = await UserService.findUserById(data.user);
-    if (!userExists) throw new Error("User not found.");
+    if (!userExists) {
+      throw new Error("User not found.");
+    }
     ExpenseService.validateDate(data.date);
     const newExpense = new Expense({
       ...data,
@@ -50,11 +55,7 @@ export class ExpenseService {
   static async updateExpenseById(
     authUserId: string,
     expenseId: string,
-    updateData: {
-      description: string;
-      date?: Date;
-      value: number;
-    }
+    updateData: ExpenseInterfaceToUpdate
   ): Promise<expenseInterface | null> {
     let cleanUpdateData = { ...updateData };
     if (cleanUpdateData.date === undefined) {

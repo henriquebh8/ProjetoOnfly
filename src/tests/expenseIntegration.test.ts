@@ -4,7 +4,8 @@ import app from "../app";
 import mongoose from "mongoose";
 import { MONGO_URI, JWT_SECRET } from "../config/config";
 
-const token = jwt.sign({ _id: "6623ff687b47d279bae00121" }, JWT_SECRET, {
+// o valor do _id é necessario para rodar os testes.
+const token = jwt.sign({ _id: "6625f08688e2ac2e052e01f7" }, JWT_SECRET, {
   expiresIn: "6h",
 });
 

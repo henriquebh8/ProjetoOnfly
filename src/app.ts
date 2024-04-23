@@ -18,7 +18,7 @@ mongoose
 
 app.use("/login", authRoutes);
 app.use("/expenses", expenseRoutes);
-app.use("/", userRoutes);
+app.use("/user", userRoutes);
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error(err.stack);

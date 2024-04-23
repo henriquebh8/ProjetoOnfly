@@ -17,7 +17,9 @@ export const login = async (req: Request, res: Response) => {
 
     const token = UserService.generateToken(user);
     res.json({ token, user: { email: user.email } });
-  } catch (error: any) {
-    res.status(500).send("Internal Server Error: " + error.message);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      res.status(500).send("Internal Server Error: " + error.message);
+    }
   }
 };

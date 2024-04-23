@@ -5,7 +5,6 @@ import { IExpense } from "../models/expense";
 
 class ExpenseController {
   async getExpenses(req: Request, res: Response): Promise<void> {
-    // buscar sempre pelo id do usuario logado para não deixar um usuario ver as despesas de outro
     if (!req.user) {
       res.status(401).send("User not authenticated");
       return;
@@ -14,8 +13,10 @@ class ExpenseController {
       const sessionUserId = req.user.id;
       const expenses = await ExpenseService.findExpensesByUserId(sessionUserId);
       res.json(expenses);
-    } catch (error: any) {
-      res.status(500).send("Error retrieving expenses: " + error.message);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        res.status(500).send("Error retrieving expenses: " + error.message);
+      }
     }
   }
 
@@ -33,8 +34,10 @@ class ExpenseController {
         return;
       }
       res.json(expense);
-    } catch (error: any) {
-      res.status(500).send("Error retrieving expense: " + error.message);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        res.status(500).send("Error retrieving expense: " + error.message);
+      }
     }
   }
 
@@ -52,8 +55,10 @@ class ExpenseController {
       };
       const newExpense = await ExpenseService.createExpense(expenseData);
       res.status(201).json(newExpense);
-    } catch (error: any) {
-      res.status(500).send("Error adding expense: " + error.message);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        res.status(500).send("Error adding expense: " + error.message);
+      }
     }
   }
 
@@ -79,12 +84,14 @@ class ExpenseController {
         return;
       }
       res.status(201).json(updatedExpense);
-    } catch (error: any) {
-      res.status(500).send("Error updating expense: " + error.message);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        res.status(500).send("Error updating expense: " + error.message);
+      }
     }
   }
 
-  async deleteExpense(req: Request, res: Response): Promise<any> {
+  async deleteExpense(req: Request, res: Response): Promise<void> {
     if (!req.user) {
       res.status(401).send("User not authenticated");
       return;
@@ -94,8 +101,10 @@ class ExpenseController {
       const userId = req.user._id;
       await ExpenseService.deleteExpense(expenseId, userId);
       res.status(204).send();
-    } catch (error: any) {
-      res.status(500).send("Error deleting expense: " + error.message);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        res.status(500).send("Error deleting expense: " + error.message);
+      }
     }
   }
 }

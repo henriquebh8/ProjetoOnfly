@@ -22,7 +22,7 @@ class UserService {
   }
 
   findUserById(userId: string): Promise<IUser | null> {
-    return User.findById(userId);
+    return User.findById(userId).exec();
   }
 }
 
